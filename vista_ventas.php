@@ -24,10 +24,10 @@
                     <a class="nav-link" href="/index.html">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard <span class="sr-only">(actual)</span></a>
+                    <a class="nav-link" href="/vista_dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/vista_ventas.php">Ventas</a>
+                    <a class="nav-link" href="#">Ventas <span class="sr-only">(actual)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Almacén</a>
@@ -38,9 +38,10 @@
             </ul>
         </div>
     </nav>
-    <main>
-        <h1>Dashboard</h1>
-</main>
+    <main style="margin-left: 15px;margin-right: 15px;">
+        <h1>Ventas</h1>
+
+    </main>
 </body>
 
 </html>
