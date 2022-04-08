@@ -24,7 +24,7 @@
                     <a class="nav-link" href="/index.html">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/vista_dashboard.php">Dashboard</a>
+                    <a class="nav-link" href="./vista_dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Ventas <span class="sr-only">(actual)</span></a>
@@ -33,7 +33,7 @@
                     <a class="nav-link" href="#">Almacén</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/vista_productos.php">Productos</a>
+                    <a class="nav-link" href="./vista_productos.php">Productos</a>
                 </li>
             </ul>
         </div>
