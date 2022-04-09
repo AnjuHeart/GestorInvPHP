@@ -31,10 +31,13 @@
                                     <form action="agregarinfo.php" method="post" name="nuevo">
                                         <form name="nuevo" id="form_registro">
                                             <div class="form-outline mb-4">
+                                                <label class="form-label">Restaurante</label>
+                                                <input type="text" name="restaurante" class="form-control form-control-lg"/>
+                                            </div>
+                                            <div class="form-outline mb-4">
                                                 <label class="form-label">Usuario</label>
                                                 <input type="text" name="usuario" class="form-control form-control-lg"/>
                                             </div>
-
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Trabajador</label>
                                                 <select class="form-select" name="trabajador" aria-label="Default select example">
