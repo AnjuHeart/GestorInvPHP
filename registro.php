@@ -7,11 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Registrarse</title>
+    <title>Sign in</title>
 </head>
-
 <body>
-    <section class="bg-dark ">
+    <header>
+        <div class="navbar navbar-dark shadow-sm">
+            <div class="container">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                    <img src="./img/logo.png" alt="logo">
+                </a>
+            </div>
+        </div>
+    </header>
+    <section>
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -49,7 +57,7 @@
                                                 <input type="password" id="typePasswordX-2"
                                                     class="form-control form-control-lg" />
                                             </div>
-                                            <input class="btn btn-success" type="submit" name="agregarinfo"
+                                            <input class="btn btn-danger" type="submit" name="agregarinfo"
                                                 value="Registar">
                                         </form>
                                 </div>
@@ -62,14 +70,7 @@
     </section>
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc</p>
-
-            <a href="/"
-                class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap" />
-                </svg>
-            </a>
+            <p class="col-md-4 mb-0 text-muted">&copy; 2022 Foodie, Inc</p>
         </footer>
     </div>
 </body>
