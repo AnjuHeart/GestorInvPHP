@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Ventas</title>
@@ -55,7 +56,41 @@
   </header>
     <main style="margin-left: 15px;margin-right: 15px;">
         <h1>Ventas</h1>
-
+        <div class="input-group">
+            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>--Seleccione Producto--</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <button class="btn btn-outline-secondary" type="button">Agregar</button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Total</th>
+                <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody> 
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Hamburgesa</td>
+                    <td>$120.00</td>
+                    <td>$120.00</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary"><i class="bi bi-plus"></i></button>
+                            <button type="button" class="btn btn-secondary"><i class="bi bi-dash-lg"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
     </main>
 </body>
 
