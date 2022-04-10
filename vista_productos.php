@@ -26,23 +26,23 @@
         <a href="#" class="navbar-brand d-flex align-items-center">
                     <img src="./img/logo.png" alt="logo">
                 </a>
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none link-dark">
+          <p class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none link-dark">
             NOMBRE DEL RESTAURANTE
-          </a>
+            </p>
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="#" class="nav-link link-dark">
+              <a href="vista_dashboard.php" class="nav-link link-dark">
                 Dashboard
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark">
+              <a href="vista_ventas.php" class="nav-link link-dark">
                 Ventas
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-dark">
+              <a href="vista_almacen.php" class="nav-link link-dark">
                 Almacen
               </a>
             </li>
