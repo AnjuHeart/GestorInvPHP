@@ -47,7 +47,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link link-secondary">
+              <a href="vista_productos.php" class="nav-link link-secondary">
                 Productos
               </a>
             </li>
