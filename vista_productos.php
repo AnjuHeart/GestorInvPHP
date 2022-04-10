@@ -16,37 +16,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
     </script>
-    <title>Dashboard!</title>
+    <title>Productos</title>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#" style="margin-left: 15px;">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<header>
+    <div class="px-3 py-2 border-bottom">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+                    <img src="./img/logo.png" alt="logo">
+                </a>
+          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none link-dark">
+            NOMBRE DEL RESTAURANTE
+          </a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/index.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./vista_dashboard.php">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./vista_ventas.php">Ventas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Almacén</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Productos <span class="sr-only">(actual)</span></a>
-                </li>
-            </ul>
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li>
+              <a href="#" class="nav-link link-dark">
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link link-dark">
+                Ventas
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link link-dark">
+                Almacen
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link link-secondary">
+                Productos
+              </a>
+            </li>
+            <li>
+              <a href="#" class="btn btn-danger">
+                Cerrar Sesión
+              </a>
+            </li>
+          </ul>
         </div>
-    </nav>
+      </div>
+    </div>
+  </header>
     <main style="margin-left: 15px;margin-right: 15px;">
         <h1>Productos</h1>
 
