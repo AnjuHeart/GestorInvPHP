@@ -18,9 +18,9 @@
 <body>
 
     <?php                       
-        $usuario = $_POST['usuario'];
-        $trabajador = $_POST['trabajador'];
-        $contra = ($_POST['contra']);
+        $usuario = sanitize_text_field($_POST['usuario']);
+        $trabajador = sanitize_text_field($_POST['trabajador']);
+        $contra = sanitize_text_field(($_POST['contra']));
 
         $con = mysqli_connect('localhost','root','',"gestor_php");
 

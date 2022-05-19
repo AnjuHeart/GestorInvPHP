@@ -1,7 +1,7 @@
 <?php
 
-    $usuario = $_POST['usuario'];
-    $contra = $_POST['contra'];
+    $usuario = sanitize_text_field($_POST['usuario']);
+    $contra = sanitize_text_field($_POST['contra']);
     session_start();
     $_SESSION['usuario'] = $usuario;
 
