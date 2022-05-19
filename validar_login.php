@@ -1,27 +1,44 @@
 <?php
 
-    $usuario = sanitize_text_field($_POST['usuario']);
-    $contra = sanitize_text_field($_POST['contra']);
-    session_start();
-    $_SESSION['usuario'] = $usuario;
+    $usuario = $_POST['usuario'];
+    $contra = $_POST['contra'];
+    $captcha = $_POST['g-recaptcha-response'];
 
-    $con = mysqli_connect('localhost','root','',"gestor_php");
+    if(!empty($captcha)){
+        $secret = "6LdOVQMgAAAAAE1DUZi6vOAeA7YFMzfQw5Y7gIam";
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
+        var_dump($response);
+        $arr=json_decode($response,TRUE);
+        if($arr["success"]){
+            session_start();
+            $_SESSION['usuario'] = $usuario;
 
-    $consulta = "SELECT*FROM usuarios WHERE usuario= '$usuario' and contraseña='$contra'";
-    $resultado = mysqli_query($con,$consulta);
+            $con = mysqli_connect('localhost','root','',"gestor_php");
 
-    $filasQuery = mysqli_num_rows($resultado);
+            $consulta = "SELECT*FROM usuarios WHERE usuario= '$usuario' and contraseña='$contra'";
+            $resultado = mysqli_query($con,$consulta);
 
-    if($filasQuery){
-        header("location:vista_dashboard.php");
-    } else{
-        ?>
-        <?php
-        include("login.php");
-        ?>
-        <h1 class="noMatchLabel">Error en la autentificación</h1>
-        <?php
+            $filasQuery = mysqli_num_rows($resultado);
+
+            if($filasQuery){
+                header("location:vista_dashboard.php");
+            } else{
+                ?>
+                <?php
+                include("login.php");
+                ?>
+                <h1 class="noMatchLabel">Error en la autentificación</h1>
+                <?php
+            }
+            mysqli_free_result($resultado);
+            mysqli_close($con);
+        }
+    }else{
+        header('location:login.php');
     }
-    mysqli_free_result($resultado);
-    mysqli_close($con);
+
+
+
+
+
 
