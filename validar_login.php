@@ -1,13 +1,12 @@
 <?php
 
     $usuario = $_POST['usuario'];
-    $contra = $_POST['contra'];
+    $contra = password_hash($_POST['contra'],PASSWORD_DEFAULT);
     $captcha = $_POST['g-recaptcha-response'];
 
     if(!empty($captcha)){
         $secret = "6LdOVQMgAAAAAE1DUZi6vOAeA7YFMzfQw5Y7gIam";
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
-        var_dump($response);
         $arr=json_decode($response,TRUE);
         if($arr["success"]){
             session_start();
