@@ -21,6 +21,8 @@
 
             if($filasQuery){
                 header("location:vista_dashboard.php");
+                SESSION_START();
+                $_SESSION['usuario']=$usuario;
             } else{
                 ?>
                 <?php

@@ -9,7 +9,7 @@
 
     <script>
     window.addEventListener('DOMContentLoaded', (event) => {
-        window.location.href = "vista_dashboard.php";
+        window.location.href = "login.php";
     });
     </script>
 
@@ -38,6 +38,7 @@
                 $sql=$sql. " values(DEFAULT,'".$usuario."','".$trabajador."','".$contra."')";   
                 $result = mysqli_query($con,$sql);
                 mysqli_close($con);
+
             }
         }else{
             header('location:registro.php');
