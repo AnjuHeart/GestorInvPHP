@@ -52,7 +52,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="btn btn-danger">
+              <a href="cerrarsesion.php" class="btn btn-danger">
                 Cerrar Sesión
               </a>
             </li>
