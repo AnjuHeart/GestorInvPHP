@@ -34,6 +34,28 @@
 
         $('#textoMateria').val($texto.slice(0, -1));
     }
+
+    function validarProducto() {
+        var desc = $('#descrArea').val();
+        var materia = $('#textoMateria').val();
+        var precio = $('#precioProd').val();
+
+
+        if (desc != "" && materia != "" && precio != "") {
+            //REPLICACIÓN DE POST
+            $.post("agregarproducto.php", {
+                desc: $('#descrArea').val(),
+                materia:  $('#textoMateria').val(),
+                precio: $('#precioProd').val()
+            },
+            function(data, status) {
+                alert("La inserción fue realizada correctamente");
+            });
+            location.reload();
+        } else {
+            alert("Favor de llenar completamente el formulario");
+        }
+    }
     </script>
     <title>Productos</title>
 </head>
@@ -52,29 +74,19 @@
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                         <li>
-                            <a href="vista_dashboard.php" class="nav-link link-dark">
-                                Dashboard
-                            </a>
+                            <a href="vista_dashboard.php" class="nav-link link-dark">Dashboard</a>
                         </li>
                         <li>
-                            <a href="vista_ventas.php" class="nav-link link-dark">
-                                Ventas
-                            </a>
+                            <a href="vista_ventas.php" class="nav-link link-dark">Ventas</a>
                         </li>
                         <li>
-                            <a href="vista_almacen.php" class="nav-link link-dark">
-                                Almacen
-                            </a>
+                            <a href="vista_almacen.php" class="nav-link link-dark">Almacen</a>
                         </li>
                         <li>
-                            <a href="vista_productos.php" class="nav-link link-secondary">
-                                Productos
-                            </a>
+                            <a href="vista_productos.php" class="nav-link link-secondary">Productos</a>
                         </li>
                         <li>
-                            <a href="cerrarsesion.php" class="btn btn-danger">
-                                Cerrar Sesión
-                            </a>
+                            <a href="cerrarsesion.php" class="btn btn-danger">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>
@@ -99,45 +111,44 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <fieldset disabled>
-                                <div class="input-group flex-nowrap disabled">
-                                    <span class="input-group-text" id="addon-wrapping">ID</span>
-                                    <input type="text" class="form-control" placeholder="Por defecto..."
-                                        aria-label="Por defecto..." aria-describedby="addon-wrapping">
-                                </div>
-                            </fieldset>
-                            <br>
-                            <div class="input-group">
-                                <span class="input-group-text">Descripción</span>
-                                <textarea class="form-control"
-                                    aria-label="Ej. 'Pollo a la plancha con salsa de ostión...'"></textarea>
+                        <fieldset disabled>
+                            <div class="input-group flex-nowrap disabled">
+                                <span class="input-group-text" id="addon-wrapping">ID</span>
+                                <input type="text" class="form-control" placeholder="Por defecto..."
+                                    aria-label="Por defecto..." aria-describedby="addon-wrapping" name="id">
                             </div>
-                            <br>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Materia Prima</span>
-                                <input type="text" class="form-control" placeholder="..." aria-label="..."
-                                    aria-describedby="button-addon2" id="textoMateria">
-                                <button class="btn btn-outline-secondary" type="button" id="seleccionMateria"
-                                    onClick="SwitchModular()">Seleccionar</button>
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Precio. $</span>
-                                <input type="text" class="form-control" placeholder="Ej. '58.00'"
-                                    aria-label="Ej. '58.00'" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Imagen</span>
-                                <input type="text" class="form-control" placeholder="No hay imagen seleccionada..."
-                                    aria-label="No hay imagen seleccionada..." aria-describedby="button-addon2">
-                                <button class="btn btn-outline-secondary" type="button"
-                                    id="button-addon2">Seleccionar</button>
-                            </div>
-                        </form>
+                        </fieldset>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-text">Descripción</span>
+                            <textarea class="form-control" aria-label="Ej. 'Pollo a la plancha con salsa de ostión...'"
+                                name="descrArea" id="descrArea"></textarea>
+                        </div>
+                        <br>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Materia Prima</span>
+                            <input type="text" class="form-control" placeholder="..." aria-label="..."
+                                aria-describedby="button-addon2" id="textoMateria">
+                            <button class="btn btn-outline-secondary" type="button" id="seleccionMateria"
+                                onClick="SwitchModular()">Seleccionar</button>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Precio. $</span>
+                            <input type="text" class="form-control" placeholder="Ej. '58.00'" aria-label="Ej. '58.00'"
+                                aria-describedby="basic-addon1" id="precioProd">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Imagen</span>
+                            <input type="text" class="form-control" placeholder="No hay imagen seleccionada..."
+                                aria-label="No hay imagen seleccionada..." aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="button"
+                                id="button-addon2">Seleccionar</button>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Añadir</button>
+                        <button type="button" class="btn btn-primary" onClick="validarProducto()">Añadir</button>
                     </div>
                 </div>
             </div>
@@ -177,7 +188,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onClick="SwitchMaterialObtain()">Añadir</button>
+                        <button type="button" class="btn btn-primary" onClick="SwitchMaterialObtain()"
+                            id="addProdBTN">Añadir</button>
                     </div>
                 </div>
             </div>
