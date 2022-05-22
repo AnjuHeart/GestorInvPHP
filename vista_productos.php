@@ -22,6 +22,18 @@
         $('#popModular .btn-close').click();
         $('#popMateria').modal('show');
     }
+
+    function SwitchMaterialObtain() {
+        $texto = "";
+        $('#checkboxes input:checked').each(function() {
+            $texto += $(this).attr('name') + ",";
+            
+        });
+        $('#popMateria .btn-close').click();
+        $('#popModular').modal('show');
+
+        $('#textoMateria').val($texto.slice(0,-1));
+    }
     </script>
     <title>Productos</title>
 </head>
@@ -103,7 +115,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Materia Prima</span>
                                 <input type="text" class="form-control" placeholder="..." aria-label="..."
-                                    aria-describedby="button-addon2">
+                                    aria-describedby="button-addon2" id="textoMateria">
                                 <button class="btn btn-outline-secondary" type="button" id="seleccionMateria"
                                     onClick="SwitchModular()">Seleccionar</button>
                             </div>
@@ -139,7 +151,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <div id="checkboxes">
                             <?php
                                 $con = mysqli_connect('localhost','root','',"gestor_php");
                                 $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
@@ -152,18 +164,18 @@
                                     $idcheck = "material" . strval($row['id']) . "," . strval($row['usuario']);
                                     $aescribir = strval($row["id"]) . ": " . strtoupper($row["nombre"]);
                                     echo '<div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="'.$idcheck.'">
+                                    <input type="checkbox" name="'.$row["id"].'" class="custom-control-input" id="'.$idcheck.'">
                                     <label class="custom-control-label" for="'.$idcheck.'">
                                     '.$aescribir.'</label>
                                 </div>
                                 <br>';
                                 }
                             ?>
-                        </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Añadir</button>
+                        <button type="button" class="btn btn-primary" onClick="SwitchMaterialObtain()">Añadir</button>
                     </div>
                 </div>
             </div>
