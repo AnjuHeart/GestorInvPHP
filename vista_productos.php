@@ -27,12 +27,12 @@
         $texto = "";
         $('#checkboxes input:checked').each(function() {
             $texto += $(this).attr('name') + ",";
-            
+
         });
         $('#popMateria .btn-close').click();
         $('#popModular').modal('show');
 
-        $('#textoMateria').val($texto.slice(0,-1));
+        $('#textoMateria').val($texto.slice(0, -1));
     }
     </script>
     <title>Productos</title>
@@ -100,11 +100,13 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="addon-wrapping">ID</span>
-                                <input type="text" class="form-control" placeholder="Identificador"
-                                    aria-label="Identificador" aria-describedby="addon-wrapping">
-                            </div>
+                            <fieldset disabled>
+                                <div class="input-group flex-nowrap disabled">
+                                    <span class="input-group-text" id="addon-wrapping">ID</span>
+                                    <input type="text" class="form-control" placeholder="Por defecto..."
+                                        aria-label="Por defecto..." aria-describedby="addon-wrapping">
+                                </div>
+                            </fieldset>
                             <br>
                             <div class="input-group">
                                 <span class="input-group-text">Descripción</span>
