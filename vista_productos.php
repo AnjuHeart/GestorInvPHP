@@ -130,8 +130,9 @@
         </div>
 
         <!-- POP MATERIA PRIMA -->
-        <div class="modal fade" id="popMateria" tabindex="-1" aria-labelledby="popMateriaLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="popMateria" tabindex="-1" role="dialog" aria-labelledby="popMateriaLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="popMateriaLabel">Seleccionar materia prima de este producto</h5>
@@ -139,19 +140,25 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="addon-wrapping">ID</span>
-                                <input type="text" class="form-control" placeholder="Identificador"
-                                    aria-label="Identificador" aria-describedby="addon-wrapping">
-                            </div>
-                            <br>
-                            <div class="input-group">
-                                <span class="input-group-text">Descripción</span>
-                                <textarea class="form-control"
-                                    aria-label="Ej. 'Pollo a la plancha con salsa de ostión...'"></textarea>
-                            </div>
-                            <br>
+                            <?php
+                                $con = mysqli_connect('localhost','root','',"gestor_php");
+                                $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
 
+                                $idUsuario = $_SESSION['idusuario'];
+                                $sql = "SELECT * FROM almacen WHERE usuario=$idUsuario";
+                                $result = mysqli_query($con,$sql);
+
+                                while ($row = $result->fetch_assoc()) {
+                                    $idcheck = "material" . strval($row['id']) . "," . strval($row['usuario']);
+                                    $aescribir = strval($row["id"]) . ": " . strtoupper($row["nombre"]);
+                                    echo '<div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="'.$idcheck.'">
+                                    <label class="custom-control-label" for="'.$idcheck.'">
+                                    '.$aescribir.'</label>
+                                </div>
+                                <br>';
+                                }
+                            ?>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -162,6 +169,7 @@
             </div>
         </div>
 
+        <!-- TABLA -->
         <table class="table">
             <thead class="thead-dark">
                 <tr>
