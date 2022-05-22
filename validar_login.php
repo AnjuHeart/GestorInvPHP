@@ -13,13 +13,14 @@
             $_SESSION['usuario'] = $usuario;
 
             $con = mysqli_connect('localhost','root','',"gestor_php");
-
-            $consulta = "SELECT*FROM usuarios WHERE usuario= '$usuario' and contraseña='$contra'";
+            
+            $consulta = "SELECT*FROM usuarios WHERE usuario= '$usuario'";
             $resultado = mysqli_query($con,$consulta);
+            $fila = mysqli_fetch_row($resultado);
 
-            $filasQuery = mysqli_num_rows($resultado);
+            print(password_verify($contra,$fila[3]));
 
-            if($filasQuery){
+            if(password_verify($contra,$fila[3])){
                 header("location:vista_dashboard.php");
                 SESSION_START();
                 $_SESSION['usuario']=$usuario;

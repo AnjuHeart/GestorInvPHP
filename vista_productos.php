@@ -132,48 +132,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td scope="row">1</td>
-                    <td>text</td>
-                    <td>text</td>
-                    <td>$00.00</td>
+               <?php
+                $con = mysqli_connect('localhost','root','',"gestor_php");
+                $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
+
+
+                $idUsuario = $_SESSION['idusuario'];
+                $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
+                $result = mysqli_query($con,$sql);
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                    <td>". $row["id"] ."</td>
+                    <td>". $row["descripcion"] ."</td>
+                    <td>". $row["materia"] ."</td>
+                    <td>". $row["precio"] ."</td>
                     <td>null</td>
-                </tr>
-                <tr>
-                    <td scope="row">2</td>
-                    <td>text</td>
-                    <td>text</td>
-                    <td>$00.00</td>
-                    <td>null</td>
-                </tr>
-                <tr>
-                    <td scope="row">3</td>
-                    <td>text</td>
-                    <td>text</td>
-                    <td>$00.00</td>
-                    <td>null</td>
-                </tr>
-                <tr>
-                    <td scope="row">4</td>
-                    <td>text</td>
-                    <td>text</td>
-                    <td>$00.00</td>
-                    <td>null</td>
-                </tr>
-                <tr>
-                    <td scope="row">5</td>
-                    <td>text</td>
-                    <td>text</td>
-                    <td>$00.00</td>
-                    <td>null</td>
-                </tr>
-                <tr>
-                    <td scope="row">6</td>
-                    <td>text</td>
-                    <td>text</td>
-                    <td>$00.00</td>
-                    <td>null</td>
-                </tr>
+                    </tr>";
+                }
+               ?>
             </tbody>
         </table>
 
