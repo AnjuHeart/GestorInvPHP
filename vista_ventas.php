@@ -49,6 +49,9 @@
                 $(this).closest("tr").find(".total").text(actual*precio);
             }
         });
+        $(".deleteBtn").click(function() {
+          $(this).closest("tr").remove();
+        });
     }
     </script>
     <script>
