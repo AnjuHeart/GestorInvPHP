@@ -14,8 +14,8 @@
         var prodPrecio = $('#seleccionProd option:selected').text().split(': $ ');
 
         var filaTabla = `<tr>
-                          <td>` + $('#seleccionProd').val() + `</td>
-                          <td>` + prodPrecio[0] + `</td>
+                          <td class="prodID">` + $('#seleccionProd').val() + `</td>
+                          <td class="producto">` + prodPrecio[0] + `</td>
                           <td class="cant">0</td>
                           <td class="precio">` + prodPrecio[1] + `</td>
                           <td class="total">0</td>
@@ -52,6 +52,30 @@
         $(".deleteBtn").click(function() {
           $(this).closest("tr").remove();
         });
+    }
+    function pushVentas(){
+      $('#tablaVentas > tbody  > tr').each(function() {
+        var idprod = $(this).find(".prodID").text();
+        var prodname = $(this).find(".producto").text();
+        var cantidad = $(this).find(".cant").text();
+        var precio = $(this).find(".precio").text();
+        var total = $(this).find(".total").text();
+
+        if(parseInt(cantidad) > 0){
+          $.post("agregarventa.php", {
+                prodid: idprod,
+                producto: prodname,
+                cant: cantidad,
+                price: precio,
+                canttotal: total
+            },
+            function(data, status) {});
+            $(this).remove();
+        }else{
+          alert("La venta de " + prodname +" no fue registrada, revisar nuevamente la información")
+        }
+      });
+      alert("Ventas registradas con éxito")
     }
     </script>
     <script>
