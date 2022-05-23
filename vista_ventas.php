@@ -59,9 +59,19 @@
         <div class="input-group">
             <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
                 <option selected>--Seleccione Producto--</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <?php
+                  $con = mysqli_connect('localhost','root','',"gestor_php");
+                  $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
+  
+  
+                  $idUsuario = $_SESSION['idusuario'];
+                  $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
+                  $result = mysqli_query($con,$sql);
+  
+                  while ($row = $result->fetch_assoc()) {
+                      echo '<option value "'.$row['id'].'">'.strtoupper($row['descripcion']).'</option>';
+                  }
+                ?>
             </select>
             <button class="btn btn-outline-secondary" type="button">Agregar</button>
         </div>
