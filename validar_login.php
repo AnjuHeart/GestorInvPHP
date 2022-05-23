@@ -10,7 +10,6 @@
         $arr=json_decode($response,TRUE);
         if($arr["success"]){
             session_start();
-            $_SESSION['usuario'] = $usuario;
 
             $con = mysqli_connect('localhost','root','',"gestor_php");
             
@@ -19,14 +18,13 @@
             $fila = mysqli_fetch_row($resultado);
 
             if(password_verify($contra, $fila[3])){
-                header("location:vista_dashboard.php");
                 SESSION_START();
-                $_SESSION['usuario']=$usuario;
+                $_SESSION['restaurante']=$fila[4];
+                header("location:vista_dashboard.php");
             } else{
                 ?>
                 <?php
                 include("login.php");
-                echo(password_verify($contra,$fila[3]));
                 ?>
                 <h1 class="noMatchLabel">Error en la autentificación</h1>
                 <?php

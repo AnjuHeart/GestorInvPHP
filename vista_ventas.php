@@ -9,78 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-    function ventaTabla() {
-        var prodPrecio = $('#seleccionProd option:selected').text().split(': $ ');
-
-        var filaTabla = `<tr>
-                          <td class="prodID">` + $('#seleccionProd').val() + `</td>
-                          <td class="producto">` + prodPrecio[0] + `</td>
-                          <td class="cant">0</td>
-                          <td class="precio">` + prodPrecio[1] + `</td>
-                          <td class="total">0</td>
-                          <td><div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-secondary addBtn"><i class="bi bi-plus"></i></button>
-                            <button type="button" class="btn btn-secondary  substractBtn"><i class="bi bi-dash-lg"></i></button>
-                            <button type="button" class="btn btn-danger deleteBtn"><i class="bi bi-x"></i></button>
-                        </div></td>
-                        </tr>`
-
-        $("#tablaVentas > tbody").append(filaTabla);
-
-        $('#seleccionProd').val(0);
-        updateButtons();
-    }
-
-    function updateButtons() {
-        $(".addBtn").click(function() {
-            var actual = parseInt($(this).closest("tr").find(".cant").text());
-            var precio = parseInt($(this).closest("tr").find(".precio").text());
-            actual += 1;
-            $(this).closest("tr").find(".cant").text(actual);
-            $(this).closest("tr").find(".total").text(actual*precio);
-        });
-        $(".substractBtn").click(function() {
-            var actual = parseInt($(this).closest("tr").find(".cant").text());
-            var precio = parseInt($(this).closest("tr").find(".precio").text());
-            if (actual >= 1) {
-                actual += -1;
-                $(this).closest("tr").find(".cant").text(actual);
-                $(this).closest("tr").find(".total").text(actual*precio);
-            }
-        });
-        $(".deleteBtn").click(function() {
-          $(this).closest("tr").remove();
-        });
-    }
-    function pushVentas(){
-      $('#tablaVentas > tbody  > tr').each(function() {
-        var idprod = $(this).find(".prodID").text();
-        var prodname = $(this).find(".producto").text();
-        var cantidad = $(this).find(".cant").text();
-        var precio = $(this).find(".precio").text();
-        var total = $(this).find(".total").text();
-
-        if(parseInt(cantidad) > 0){
-          $.post("agregarventa.php", {
-                prodid: idprod,
-                producto: prodname,
-                cant: cantidad,
-                price: precio,
-                canttotal: total
-            },
-            function(data, status) {});
-            $(this).remove();
-        }else{
-          alert("La venta de " + prodname +" no fue registrada, revisar nuevamente la información")
-        }
-      });
-      alert("Ventas registradas con éxito")
-    }
-    </script>
-    <script>
-
-    </script>
     <title>Ventas</title>
 </head>
 
@@ -93,7 +21,7 @@
                         <img src="./img/logo.png" alt="logo">
                     </a>
                     <p class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none link-dark">
-                        NOMBRE DEL RESTAURANTE
+                        <?php SESSION_START(); echo("Restaurante: ".$_SESSION['restaurante']); ?>
                     </p>
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
@@ -165,5 +93,73 @@
           <button type="button" class="btn btn-success" style="position: fixed; bottom: 30px; right: 20px;" onClick="pushVentas()">Guardar Ventas</button>
     </main>
 </body>
+<script>
+    function ventaTabla() {
+        var prodPrecio = $('#seleccionProd option:selected').text().split(': $ ');
 
+        var filaTabla = `<tr>
+                          <td class="prodID">` + $('#seleccionProd').val() + `</td>
+                          <td class="producto">` + prodPrecio[0] + `</td>
+                          <td class="cant">0</td>
+                          <td class="precio">` + prodPrecio[1] + `</td>
+                          <td class="total">0</td>
+                          <td><div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary addBtn"><i class="bi bi-plus"></i></button>
+                            <button type="button" class="btn btn-secondary  substractBtn"><i class="bi bi-dash-lg"></i></button>
+                            <button type="button" class="btn btn-danger deleteBtn"><i class="bi bi-x"></i></button>
+                        </div></td>
+                        </tr>`
+
+        $("#tablaVentas > tbody").append(filaTabla);
+
+        $('#seleccionProd').val(0);
+        updateButtons();
+    }
+
+    function updateButtons() {
+        $(".addBtn").click(function() {
+            var actual = parseInt($(this).closest("tr").find(".cant").text());
+            var precio = parseInt($(this).closest("tr").find(".precio").text());
+            actual += 1;
+            $(this).closest("tr").find(".cant").text(actual);
+            $(this).closest("tr").find(".total").text(actual*precio);
+        });
+        $(".substractBtn").click(function() {
+            var actual = parseInt($(this).closest("tr").find(".cant").text());
+            var precio = parseInt($(this).closest("tr").find(".precio").text());
+            if (actual >= 1) {
+                actual += -1;
+                $(this).closest("tr").find(".cant").text(actual);
+                $(this).closest("tr").find(".total").text(actual*precio);
+            }
+        });
+        $(".deleteBtn").click(function() {
+          $(this).closest("tr").remove();
+        });
+    }
+    function pushVentas(){
+      $('#tablaVentas > tbody  > tr').each(function() {
+        var idprod = $(this).find(".prodID").text();
+        var prodname = $(this).find(".producto").text();
+        var cantidad = $(this).find(".cant").text();
+        var precio = $(this).find(".precio").text();
+        var total = $(this).find(".total").text();
+
+        if(parseInt(cantidad) > 0){
+          $.post("agregarventa.php", {
+                prodid: idprod,
+                producto: prodname,
+                cant: cantidad,
+                price: precio,
+                canttotal: total
+            },
+            function(data, status) {});
+            $(this).remove();
+        }else{
+          alert("La venta de " + prodname +" no fue registrada, revisar nuevamente la información")
+        }
+      });
+      alert("Ventas registradas con éxito")
+    }
+    </script>
 </html>

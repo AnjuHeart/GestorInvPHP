@@ -20,6 +20,7 @@
     <?php                       
         $usuario = $_POST['usuario'];
         $trabajador = $_POST['trabajador'];
+        $restaurante = $_POST['restaurante'];
         $contra = password_hash($_POST['contra'], PASSWORD_DEFAULT);
         $captcha = $_POST['g-recaptcha-response'];
 
@@ -34,8 +35,8 @@
                 }
 
                 mysqli_select_db($con,'gestor_php');                
-                $sql="insert into usuarios(id,usuario, trabajador, contraseña)";
-                $sql=$sql. " values(DEFAULT,'".$usuario."','".$trabajador."','".$contra."')";   
+                $sql="insert into usuarios(id,usuario, trabajador, contraseña, restaurante)";
+                $sql=$sql. " values(DEFAULT,'".$usuario."','".$trabajador."','".$contra."','".$restaurante."')";   
                 $result = mysqli_query($con,$sql);
                 mysqli_close($con);
 
