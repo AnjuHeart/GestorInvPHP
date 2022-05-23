@@ -1,7 +1,7 @@
 <?php
 
     $usuario = $_POST['usuario'];
-    $contra = password_hash($_POST['contra'],PASSWORD_DEFAULT);
+    $contra = $_POST['contra'];
     $captcha = $_POST['g-recaptcha-response'];
 
     if(!empty($captcha)){
@@ -18,9 +18,7 @@
             $resultado = mysqli_query($con,$consulta);
             $fila = mysqli_fetch_row($resultado);
 
-            print(password_verify($contra,$fila[3]));
-
-            if(password_verify($contra,$fila[3])){
+            if(password_verify($contra, $fila[3])){
                 header("location:vista_dashboard.php");
                 SESSION_START();
                 $_SESSION['usuario']=$usuario;
@@ -28,6 +26,7 @@
                 ?>
                 <?php
                 include("login.php");
+                echo(password_verify($contra,$fila[3]));
                 ?>
                 <h1 class="noMatchLabel">Error en la autentificación</h1>
                 <?php
