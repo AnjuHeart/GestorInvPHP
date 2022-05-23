@@ -136,21 +136,9 @@
                 </tr>
             </thead>
             <tbody>
-                <!--<tr>
-                    <th scope="row">1</th>
-                    <td>Hamburgesa</td>
-                    <td>$120.00</td>
-                    <td>$120.00</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-secondary"><i class="bi bi-plus"></i></button>
-                            <button type="button" class="btn btn-secondary"><i class="bi bi-dash-lg"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
-                        </div>
-                    </td>
-                </tr>-->
             </tbody>
         </table>
+          <button type="button" class="btn btn-success" style="position: fixed; bottom: 30px; right: 20px;" onClick="pushVentas()">Guardar Ventas</button>
     </main>
 </body>
 
