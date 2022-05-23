@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      function ventaTabla(){
+        var prodPrecio = $('#seleccionProd option:selected').text().split(': $ ');
+        
+        var filaTabla = `<tr>
+                          <td>`+ $('#seleccionProd').val() +`</td>
+                          <td>`+ prodPrecio[0] +`</td>
+                          <td>0</td>
+                          <td>`+ prodPrecio[1] + `</td>
+                          <td>0</td>
+                          <td><div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary"><i class="bi bi-plus"></i></button>
+                            <button type="button" class="btn btn-secondary"><i class="bi bi-dash-lg"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
+                        </div></td>
+                        </tr>`
+
+        $("#tablaVentas > tbody").append(filaTabla);
+
+        $('#seleccionProd').val(0);
+      }
+    </script>
     <title>Ventas</title>
 </head>
 
@@ -57,8 +80,8 @@
     <main style="margin-left: 15px;margin-right: 15px;">
         <h1>Ventas</h1>
         <div class="input-group">
-            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                <option selected>--Seleccione Producto--</option>
+            <select class="form-select" id="seleccionProd" aria-label="Example select with button addon">
+                <option selected value="0">--Seleccione Producto--</option>
                 <?php
                   $con = mysqli_connect('localhost','root','',"gestor_php");
                   $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
@@ -69,24 +92,25 @@
                   $result = mysqli_query($con,$sql);
   
                   while ($row = $result->fetch_assoc()) {
-                      echo '<option value "'.$row['id'].'">'.strtoupper($row['descripcion']).'</option>';
+                      echo '<option value="'.$row['id'].'">'.strtoupper($row['descripcion']) . ': $ '. strval($row['precio']) .'</option>';
                   }
                 ?>
             </select>
-            <button class="btn btn-outline-secondary" type="button">Agregar</button>
+            <button class="btn btn-outline-secondary" type="button" onClick="ventaTabla()">Agregar</button>
         </div>
-        <table class="table">
+        <table class="table" id="tablaVentas">
             <thead>
                 <tr>
-                <th scope="col">Cantidad</th>
+                <th scope="col">ID de Producto</th>
                 <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Total</th>
                 <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody> 
-                <tr>
+                <!--<tr>
                     <th scope="row">1</th>
                     <td>Hamburgesa</td>
                     <td>$120.00</td>
@@ -98,7 +122,7 @@
                             <button type="button" class="btn btn-danger"><i class="bi bi-x"></i></button>
                         </div>
                     </td>
-                </tr>
+                </tr>-->
             </tbody>
             </table>
     </main>
