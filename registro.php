@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript" src="./js/scriptConsultas.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Sign in</title>
 </head>
-<body>
+<body onload="llamarPhp(0); crearSelector();">
     <header>
         <div class="navbar navbar-dark shadow-sm">
             <div class="container">
@@ -33,7 +35,8 @@
                                         <form name="nuevo" id="form_registro">
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Restaurante</label>
-                                                <input type="text" name="restaurante" class="form-control form-control-lg" required/>
+                                                <div id="lugarSelector" name="restaurante"> Lugar donde se coloca el  Selector en la pagina</div>
+                                                <p>Otro: </p> <input type="text" name="otro" class="form-control form-control-lg"/>
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Usuario</label>
@@ -42,7 +45,7 @@
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Trabajador</label>
                                                 <select class="form-select" name="trabajador" aria-label="Default select example">
-                                                    <option selected>Seleccione tipo de trabajador</option>
+                                                    <option selected disabled>Seleccione tipo de trabajador</option>
                                                     <option value="vendedor">Vendedor</option>
                                                     <option value="administrativo">Administrativo</option>
                                                 </select>

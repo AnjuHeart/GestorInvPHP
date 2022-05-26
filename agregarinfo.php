@@ -21,6 +21,7 @@
         $usuario = $_POST['usuario'];
         $trabajador = $_POST['trabajador'];
         $restaurante = $_POST['restaurante'];
+        $otro= $_POST['otro'];
         $contra = password_hash($_POST['contra'], PASSWORD_DEFAULT);
         $captcha = $_POST['g-recaptcha-response'];
 
@@ -36,10 +37,13 @@
 
                 mysqli_select_db($con,'gestor_php');                
                 $sql="insert into usuarios(id,usuario, trabajador, contraseña, restaurante)";
-                $sql=$sql. " values(DEFAULT,'".$usuario."','".$trabajador."','".$contra."','".$restaurante."')";   
+                if($otro==""){
+                    $sql=$sql. " values(DEFAULT,'".$usuario."','".$trabajador."','".$contra."','".$restaurante."')";   
+                }else{
+                    $sql=$sql. " values(DEFAULT,'".$usuario."','".$trabajador."','".$contra."','".$otro."')"; 
+                }
                 $result = mysqli_query($con,$sql);
                 mysqli_close($con);
-
             }
         }else{
             header('location:registro.php');
