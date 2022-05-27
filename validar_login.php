@@ -26,7 +26,9 @@
                 <?php
                 include("login.php");
                 ?>
-                <h1 class="noMatchLabel">Error en la autentificación</h1>
+                <script type = "text/javascript"> 
+                    alert("Verifique que el usuario y contraseña sean correctos");
+                </script>
                 <?php
             }
             mysqli_free_result($resultado);
