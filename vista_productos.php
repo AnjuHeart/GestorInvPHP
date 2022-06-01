@@ -207,25 +207,25 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $con = mysqli_connect('localhost','root','',"gestor_php");
-                $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
+                    <?php
+                    $con = mysqli_connect('localhost','root','',"gestor_php");
+                    $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
 
 
-                $idUsuario = $_SESSION['idusuario'];
-                $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
-                $result = mysqli_query($con,$sql);
+                    $idUsuario = $_SESSION['idusuario'];
+                    $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
+                    $result = mysqli_query($con,$sql);
 
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                    <td>". $row["id"] ."</td>
-                    <td>". $row["descripcion"] ."</td>
-                    <td>". $row["materia"] ."</td>
-                    <td>". $row["precio"] ."</td>
-                    <td>null</td>
-                    </tr>";
-                }
-               ?>
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                        <td>". $row["id"] ."</td>
+                        <td>". $row["descripcion"] ."</td>
+                        <td>". $row["materia"] ."</td>
+                        <td>". $row["precio"] ."</td>
+                        <td>null</td>
+                        </tr>";
+                    }
+                ?>
             </tbody>
         </table>
 

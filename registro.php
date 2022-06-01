@@ -10,6 +10,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Sign in</title>
 </head>
+
 <body>
     <header>
         <div class="navbar navbar-dark shadow-sm">
@@ -33,15 +34,30 @@
                                         <form name="nuevo" id="form_registro">
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Restaurante</label>
-                                                <input type="text" name="restaurante" class="form-control form-control-lg" required/>
+                                                <select class="form-select" name="restaurante"
+                                                    aria-label="Seleccione el restaurante">
+                                                    <!---option selected>Seleccione tipo de trabajador</option>--->
+                                                    <?php
+                                                        $con = mysqli_connect('localhost','root','',"gestor_php");
+                                                        
+                                                        $sql = "SELECT * FROM restaurantes";
+                                                        $result = mysqli_query($con,$sql);
+
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value=".$row['id'].">".$row['nombre']."</option>";
+                                                        }
+                                                    ?>
+                                                </select>
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Usuario</label>
-                                                <input type="text" name="usuario" class="form-control form-control-lg" required/>
+                                                <input type="text" name="usuario" class="form-control form-control-lg"
+                                                    required />
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Trabajador</label>
-                                                <select class="form-select" name="trabajador" aria-label="Default select example">
+                                                <select class="form-select" name="trabajador"
+                                                    aria-label="Default select example">
                                                     <option selected>Seleccione tipo de trabajador</option>
                                                     <option value="gerente">Gerente</option>
                                                     <option value="vendedor">Vendedor</option>
@@ -52,16 +68,17 @@
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="typePasswordX-2">Contraseña</label>
                                                 <input type="password" id="typePasswordX-2" name="contra"
-                                                    class="form-control form-control-lg" required/>
+                                                    class="form-control form-control-lg" required />
                                             </div>
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="typePasswordX-2">Confirmar
                                                     Contraseña</label>
                                                 <input type="password" id="typePasswordX-2"
-                                                    class="form-control form-control-lg" required/>
+                                                    class="form-control form-control-lg" required />
                                             </div>
-                                            <div class="form-outline mb-4 g-recaptcha" data-sitekey="6LdOVQMgAAAAALzmj78rR_AB2OvYwCC38rzN_IyC"></div>
+                                            <div class="form-outline mb-4 g-recaptcha"
+                                                data-sitekey="6LdOVQMgAAAAALzmj78rR_AB2OvYwCC38rzN_IyC"></div>
                                             <input class="btn btn-danger" type="submit" name="agregarinfo"
                                                 value="Registrar">
                                         </form>
