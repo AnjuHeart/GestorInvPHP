@@ -170,11 +170,16 @@
                                 $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
 
                                 $idUsuario = $_SESSION['idusuario'];
-                                $sql = "SELECT * FROM almacen WHERE usuario=$idUsuario";
+                                $sql = "SELECT * FROM usuarios WHERE id=$idUsuario LIMIT 1;";
+                                $result = mysqli_query($con,$sql);
+                                $row = mysqli_fetch_array($result);
+                                $idRestaurante = $row['idrestaurante'];
+                                
+                                $sql = "SELECT * FROM almacen WHERE idrestaurante=$idRestaurante";
                                 $result = mysqli_query($con,$sql);
 
                                 while ($row = $result->fetch_assoc()) {
-                                    $idcheck = "material" . strval($row['id']) . "," . strval($row['usuario']);
+                                    $idcheck = "material" . strval($row['id']) . "," . strval($row['idrestaurante']);
                                     $aescribir = strval($row["id"]) . ": " . strtoupper($row["nombre"]);
                                     echo '<div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="'.$row["id"].'" class="custom-control-input" id="'.$idcheck.'">

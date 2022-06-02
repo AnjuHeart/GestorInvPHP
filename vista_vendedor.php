@@ -37,9 +37,9 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>ID de Venta</th>
-                    <th>Materia Prima</th>
+                    <th>ID de Producto</th>
                     <th>Cantidad</th>
+                    <th>Materia Prima</th>
                     <th>Total</th>
                     <th>Notas</th>
                 </tr>
@@ -47,21 +47,25 @@
             <tbody>
             <?php
                 $con = mysqli_connect('localhost','root','',"gestor_php");
-                $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
+                $_SESSION['idusuario'] = "7"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
 
                 $idUsuario = $_SESSION['idusuario'];
-                $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
-                $resultProductos = mysqli_query($con,$sql);
-
+                $sql = "SELECT * FROM usuarios WHERE id=$idUsuario LIMIT 1;";
+                $result = mysqli_query($con,$sql);
+                $row = mysqli_fetch_array($result);
+                $idRestaurante = $row['idrestaurante'];
                 
+                $sql = "SELECT * FROM ventas WHERE idrestaurante=$idRestaurante";
+                $resultRestaurante = mysqli_query($con,$sql);
 
-                while ($row = $resultProductos->fetch_assoc()) {
+                while ($row = $resultRestaurante->fetch_assoc()) {
                     echo "<tr>
                     <td>". $row["id"] ."</td>
-                    <td>". $row["descripcion"] ."</td>
-                    <td>". $row["materia"] ."</td>
-                    <td>". $row["precio"] ."</td>
-                    <td>null</td>
+                    <td>". $row["idprod"] ."</td>
+                    <td>". $row["cantidad"] ."</td>
+                    <td></td>
+                    <td>". $row["total"] ."</td>
+                    <td>". $row["notas"] ."</td>
                     </tr>";
                 }
                ?>
