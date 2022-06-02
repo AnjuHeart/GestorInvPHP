@@ -59,11 +59,26 @@
                 $resultRestaurante = mysqli_query($con,$sql);
 
                 while ($row = $resultRestaurante->fetch_assoc()) {
+                    $idProd = $row["idprod"];
                     echo "<tr>
                     <td>". $row["id"] ."</td>
-                    <td>". $row["idprod"] ."</td>
+                    <td>". $idProd ."</td>
                     <td>". $row["cantidad"] ."</td>
-                    <td></td>
+                    <td>";
+                        $sql = "SELECT * FROM productos WHERE id=$idProd";
+                        $resultProducto = mysqli_query($con,$sql);
+                        $filaProd = mysqli_fetch_array($resultProducto);
+                        $materiaProd = explode(",",$filaProd['materia']);
+                        foreach ($materiaProd as $valor) {
+                            $sql = "SELECT * FROM almacen WHERE id=$valor";
+                            $resultMateria = mysqli_query($con,$sql);
+                            $filaMateria = mysqli_fetch_array($resultMateria);
+
+                            echo strtoupper($filaMateria['nombre']);
+                            echo "<br>";
+                        }
+                        
+                    echo "</td>
                     <td>". $row["total"] ."</td>
                     <td>". $row["notas"] ."</td>
                     </tr>";
