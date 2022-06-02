@@ -89,7 +89,7 @@
                             <button type="button" class="btn btn-secondary addBtn">+</button>
                             <button type="button" class="btn btn-secondary  substractBtn">-</button>
                             <button type="button" class="btn btn-danger deleteBtn">x</button>
-                        </div></td>';
+                            </div></td>';
                             echo "<tr>";
                         }
                         
@@ -102,6 +102,7 @@
                ?>
             </tbody>
         </table>
+        <button type="button" class="btn btn-success" style="position: fixed; bottom: 30px; right: 20px;" onClick="">Enviar Pedidos</button>
     </main>
 </body>
 </html>
