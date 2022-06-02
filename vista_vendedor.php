@@ -6,7 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Ventas de Restaurante</title>
+    <script>
+        function updateButtons() {
+        $(".addBtn").click(function() {
+            
+            var actual = parseInt($(this).closest("tr").find(".cant").text());
+            actual += 1;
+            $(this).closest("tr").find(".cant").text(actual);
+            console.log('Funciona');
+        });
+        $(".substractBtn").click(function() {
+            var actual = parseInt($(this).closest("tr").find(".cant").text());
+            if (actual >= 1) {
+                actual += -1;
+                $(this).closest("tr").find(".cant").text(actual);
+            }
+        });
+    }
+    </script>
 </head>
 <body>
 <header>
@@ -68,6 +87,7 @@
                     <table class='table'>
                         <thead class='thead-dark'>
                             <tr>
+                                <th>ID</th>
                                 <th>Materia</th>
                                 <th>Cantidad</th>
                                 <th>Acciones</th>
@@ -83,12 +103,12 @@
                             $resultMateria = mysqli_query($con,$sql);
                             $filaMateria = mysqli_fetch_array($resultMateria);
                             echo "<tr>";
+                            echo "<td>".$filaMateria['id']."</td>";
                             echo "<td>".strtoupper($filaMateria['nombre'])."</td>";
-                            echo "<td>".$row["cantidad"]."</td>";
+                            echo "<td class='cant'>".$row["cantidad"]."</td>";
                             echo '<td><div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-secondary addBtn">+</button>
-                            <button type="button" class="btn btn-secondary  substractBtn">-</button>
-                            <button type="button" class="btn btn-danger deleteBtn">x</button>
+                            <button type="button" class="btn btn-danger  substractBtn">-</button>
                             </div></td>';
                             echo "<tr>";
                         }
@@ -99,6 +119,7 @@
                     <td>". $row["notas"] ."</td>
                     </tr>";
                 }
+                echo "<script>updateButtons();</script>"
                ?>
             </tbody>
         </table>
