@@ -64,7 +64,16 @@
                     <td>". $row["id"] ."</td>
                     <td>". $idProd ."</td>
                     <td>". $row["cantidad"] ."</td>
-                    <td>";
+                    <td>
+                    <table class='table'>
+                        <thead class='thead-dark'>
+                            <tr>
+                                <th>Materia</th>
+                                <th>Cantidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
                         $sql = "SELECT * FROM productos WHERE id=$idProd";
                         $resultProducto = mysqli_query($con,$sql);
                         $filaProd = mysqli_fetch_array($resultProducto);
@@ -73,12 +82,19 @@
                             $sql = "SELECT * FROM almacen WHERE id=$valor";
                             $resultMateria = mysqli_query($con,$sql);
                             $filaMateria = mysqli_fetch_array($resultMateria);
-
-                            echo strtoupper($filaMateria['nombre']);
-                            echo "<br>";
+                            echo "<tr>";
+                            echo "<td>".strtoupper($filaMateria['nombre'])."</td>";
+                            echo "<td>".$row["cantidad"]."</td>";
+                            echo '<td><div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary addBtn">+</button>
+                            <button type="button" class="btn btn-secondary  substractBtn">-</button>
+                            <button type="button" class="btn btn-danger deleteBtn">x</button>
+                        </div></td>';
+                            echo "<tr>";
                         }
                         
-                    echo "</td>
+                    echo "</tbody>
+                    </table></td>
                     <td>". $row["total"] ."</td>
                     <td>". $row["notas"] ."</td>
                     </tr>";
