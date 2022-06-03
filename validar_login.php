@@ -10,7 +10,6 @@
         $arr=json_decode($response,TRUE);
         if($arr["success"]){
             session_start();
-            $_SESSION['usuario'] = $usuario;
 
             $con = mysqli_connect('localhost','root','',"gestor_php");
             
@@ -29,7 +28,9 @@
                 include("login.php");
                 echo(password_verify($contra,$fila[3]));
                 ?>
-                <h1 class="noMatchLabel">Error en la autentificación</h1>
+                <script type = "text/javascript"> 
+                    alert("Verifique que el usuario y contraseña sean correctos");
+                </script>
                 <?php
             }
             mysqli_free_result($resultado);

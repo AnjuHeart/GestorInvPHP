@@ -39,7 +39,6 @@
                 $sql=$sql. " values(DEFAULT,'".$usuario."','".$trabajador."','".$contra."',".$restaurante.")";   
                 $result = mysqli_query($con,$sql);
                 mysqli_close($con);
-
             }
         }else{
             header('location:registro.php');
