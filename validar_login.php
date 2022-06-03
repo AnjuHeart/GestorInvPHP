@@ -19,12 +19,14 @@
 
             if(password_verify($contra, $fila[3])){
                 SESSION_START();
-                $_SESSION['restaurante']=$fila[4];
+                $_SESSION['usuario']=$usuario;
+                $_SESSION['idrestaurante']=$fila[4];
                 header("location:vista_dashboard.php");
             } else{
                 ?>
                 <?php
                 include("login.php");
+                echo(password_verify($contra,$fila[3]));
                 ?>
                 <script type = "text/javascript"> 
                     alert("Verifique que el usuario y contraseña sean correctos");

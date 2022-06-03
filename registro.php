@@ -15,6 +15,8 @@
     <title>Sign in</title>
 </head>
 <body onload="llamarPhp(0); crearSelector();">
+
+<body>
     <header>
         <div class="navbar navbar-dark shadow-sm">
             <div class="container">
@@ -36,18 +38,33 @@
                                     <form action="agregarinfo.php" method="post" name="nuevo"  onsubmit="verificarPasswords(); return false">
                                         <form name="nuevo" id="form_registro">
                                             <div class="form-outline mb-4">
-                                                <label class="form-label">Restaurante:</label>
-                                                <div id="lugarSelector" name="restaurante"> Lugar donde se coloca el  Selector en la pagina</div><br>
-                                                <p>Otro: </p> <input type="text" name="otro" class="form-control form-control-lg"/>
+                                                <label class="form-label">Restaurante</label>
+                                                <select class="form-select" name="restaurante"
+                                                    aria-label="Seleccione el restaurante">
+                                                    <!---option selected>Seleccione tipo de trabajador</option>--->
+                                                    <?php
+                                                        $con = mysqli_connect('localhost','root','',"gestor_php");
+                                                        
+                                                        $sql = "SELECT * FROM restaurantes";
+                                                        $result = mysqli_query($con,$sql);
+
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<option value=".$row['id'].">".$row['nombre']."</option>";
+                                                        }
+                                                    ?>
+                                                </select>
                                             </div>
+                                            ¿No estas registrado? <a href="nuevorestaurante.php" style="font-weight:bold">¡REGISTRATE!</a><br><br>
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Usuario</label>
-                                                <input type="text" name="usuario" class="form-control form-control-lg" required/>
+                                                <input type="text" name="usuario" class="form-control form-control-lg"
+                                                    required />
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Trabajador</label>
-                                                <select class="form-select" name="trabajador" aria-label="Default select example">
-                                                    <option selected disabled>Seleccione tipo de trabajador</option>
+                                                <select class="form-select" name="trabajador"
+                                                    aria-label="Default select example">
+                                                    <option selected>Seleccione tipo de trabajador</option>
                                                     <option value="vendedor">Vendedor</option>
                                                     <option value="administrativo">Administrativo</option>
                                                 </select>
@@ -59,6 +76,7 @@
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="typePasswordX-2">Contraseña</label>
+                                              
                                                 <input type="password" id="pass1" name="contra"
                                                     class="form-control form-control-lg" required/>
                                             </div>

@@ -134,11 +134,10 @@
             <tbody>
                 <?php
                 $con = mysqli_connect('localhost','root','',"gestor_php");
-                $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
 
 
-                $idUsuario = $_SESSION['idusuario'];
-                $sql = "SELECT * FROM almacen WHERE usuario=$idUsuario";
+                $idAlmacen = $_SESSION['idrestaurante'];
+                $sql = "SELECT * FROM almacen WHERE idrestaurante=$idAlmacen";
                 $result = mysqli_query($con,$sql);
 
                 while ($row = $result->fetch_assoc()) {
