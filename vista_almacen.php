@@ -44,7 +44,17 @@
                         <img src="./img/logo.png" alt="logo">
                     </a>
                     <p class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none link-dark">
-                    <?php SESSION_START(); echo("Restaurante: ".$_SESSION['restaurante']); ?>
+                    <?php
+                        SESSION_START();
+                        $idRestaurante = $_SESSION['idrestaurante'];
+                        
+                        $con = mysqli_connect('localhost','root','',"gestor_php");
+                        
+                        $consulta = "SELECT*FROM restaurantes WHERE id= '$idRestaurante'";
+                        $resultado = mysqli_query($con,$consulta);
+                        $fila = mysqli_fetch_row($resultado);
+                        
+                        echo("Restaurante: ".$fila[1]); ?>
                     </p>
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
