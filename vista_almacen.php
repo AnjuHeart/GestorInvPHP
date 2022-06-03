@@ -135,8 +135,9 @@
                 <?php
                 $con = mysqli_connect('localhost','root','',"gestor_php");
 
-                $idUsuario = $_SESSION['idusuario'];
-                $sql = "SELECT * FROM almacen WHERE usuario=$idUsuario";
+
+                $idAlmacen = $_SESSION['idrestaurante'];
+                $sql = "SELECT * FROM almacen WHERE idrestaurante=$idAlmacen";
                 $result = mysqli_query($con,$sql);
 
                 while ($row = $result->fetch_assoc()) {

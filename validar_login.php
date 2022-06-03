@@ -21,6 +21,7 @@
             if(password_verify($contra, $fila[3])){
                 SESSION_START();
                 $_SESSION['usuario']=$usuario;
+                $_SESSION['idrestaurante']=$fila[4];
                 header("location:vista_dashboard.php");
             } else{
                 ?>

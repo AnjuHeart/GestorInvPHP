@@ -49,6 +49,7 @@
                                                     ?>
                                                 </select>
                                             </div>
+                                            ¿No estas registrado? <a href="nuevorestaurante.php" style="font-weight:bold">¡REGISTRATE!</a><br><br>
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Usuario</label>
                                                 <input type="text" name="usuario" class="form-control form-control-lg"
