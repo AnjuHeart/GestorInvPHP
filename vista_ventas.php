@@ -78,9 +78,6 @@
       alert("Ventas registradas con éxito")
     }
     </script>
-    <script>
-
-    </script>
     <title>Ventas</title>
 </head>
 
@@ -134,9 +131,7 @@
                 <option selected value="0">--Seleccione Producto--</option>
                 <?php
                   $con = mysqli_connect('localhost','root','',"gestor_php");
-                  $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
-  
-  
+                  
                   $idUsuario = $_SESSION['idusuario'];
                   $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
                   $result = mysqli_query($con,$sql);

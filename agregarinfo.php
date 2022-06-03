@@ -21,7 +21,7 @@
         $usuario = $_POST['usuario'];
         $trabajador = $_POST['trabajador'];
         $restaurante = $_POST['restaurante'];
-        $contra = password_hash($_POST['contra'],PASSWORD_DEFAULT);
+        $contra = password_hash($_POST['contra'], PASSWORD_DEFAULT);
         $captcha = $_POST['g-recaptcha-response'];
 
         if(!empty($captcha)){

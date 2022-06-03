@@ -59,7 +59,6 @@
                                                 <select class="form-select" name="trabajador"
                                                     aria-label="Default select example">
                                                     <option selected>Seleccione tipo de trabajador</option>
-                                                    <option value="gerente">Gerente</option>
                                                     <option value="vendedor">Vendedor</option>
                                                     <option value="administrativo">Administrativo</option>
                                                 </select>

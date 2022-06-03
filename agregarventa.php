@@ -1,5 +1,4 @@
 <?php
-    $_SESSION['idusuario'] = "6"; //Esta línea debe ser eliminada cuando el login funcione
     $idprod = $_POST['prodid'];
     $prodname = $_POST['producto'];
     $cantidad = $_POST['cant'];

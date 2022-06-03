@@ -1,5 +1,4 @@
 <?php
-    $_SESSION['idusuario'] = "6"; //Esta línea debe ser eliminada cuando el login funcione
     $nombre = $_POST['nombre'];
     $exist = $_POST['existencias'];
     

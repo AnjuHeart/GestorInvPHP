@@ -1,5 +1,4 @@
 <?php
-    $_SESSION['idusuario'] = "6"; //Esta línea debe ser eliminada cuando el login funcione
     $desc = $_POST['desc'];
     $materia = $_POST['materia'];
     $precio = $_POST['precio'];
