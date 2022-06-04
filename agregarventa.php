@@ -11,8 +11,8 @@
     
     $con = mysqli_connect('localhost','root','',"gestor_php");
     mysqli_select_db($con,'gestor_php');                
-    $sql="INSERT INTO `ventas`(`id`, `idprod`, `producto`, `cantidad`, `precio`, `total`, `usuario`, `idrestaurante`, `notas`)";
-    $sql=$sql. " values(DEFAULT,".$idprod.",'".$prodname."',".$cantidad.",".$precio.",".$total.",".$idUsuario.",".$idRestaurante.",'".$notas."')";   
+    $sql="INSERT INTO `ventas`(`id`, `idprod`, `producto`, `cantidad`, `precio`, `total`, `usuario`, `idrestaurante`, `notas`, `estado`)";
+    $sql=$sql. " values(DEFAULT,".$idprod.",'".$prodname."',".$cantidad.",".$precio.",".$total.",".$idUsuario.",".$idRestaurante.",'".$notas."','pendiente')";   
     $result = mysqli_query($con,$sql);
     mysqli_close($con);
 ?>
