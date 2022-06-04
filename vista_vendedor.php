@@ -164,7 +164,8 @@
                 idprod: idProducto,
                 cant: cantVenta,
                 total: totalVenta,
-            },function(data, status) {})
+            },function(data, status) {});
+            $(this).remove();
       });
       alert("Salidas registradas con éxito");
     }
