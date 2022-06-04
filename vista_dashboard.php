@@ -9,6 +9,11 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Dashboard</title>
     <script src="./js/chart.min.js"></script>
+    <style>
+    .chartBox {
+        width: 35%;
+    }
+    </style>
 </head>
 
 <body>
@@ -66,10 +71,7 @@
     </header>
     <main style="margin-left: 15px;margin-right: 15px;">
         <h1>Dashboard</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <?php
+                <?php
                   $idRestaurante = $_SESSION['idrestaurante'];
 
                   $con = mysqli_connect('localhost','root','',"gestor_php");
@@ -102,53 +104,116 @@
                   $data = substr_replace($data ,"",-1);
                   $data =$data."]";
 
-                  echo "<canvas id='myChart' width='200' height='200'></canvas>
-                  <script>
-                  const ctx = document.getElementById('myChart').getContext('2d');
-                  const myChart = new Chart(ctx, {
-                      type: 'bar',
-                      data: {
-                          labels: $labels,
-                          datasets: [{
-                              label: 'Veces que se compró',
-                              data: $data,
-                              backgroundColor: [
-                                  'rgba(255, 99, 132, 0.2)',
-                                  'rgba(54, 162, 235, 0.2)',
-                                  'rgba(255, 206, 86, 0.2)',
-                                  'rgba(75, 192, 192, 0.2)',
-                                  'rgba(153, 102, 255, 0.2)',
-                                  'rgba(255, 159, 64, 0.2)'
-                              ],
-                              borderColor: [
-                                  'rgba(255, 99, 132, 1)',
-                                  'rgba(54, 162, 235, 1)',
-                                  'rgba(255, 206, 86, 1)',
-                                  'rgba(75, 192, 192, 1)',
-                                  'rgba(153, 102, 255, 1)',
-                                  'rgba(255, 159, 64, 1)'
-                              ],
-                              borderWidth: 1
-                          }]
-                      },
-                      options: {
-                          scales: {
-                              y: {
-                                  beginAtZero: true
-                              }
-                          }
-                      }
-                  });
-                  </script>";
-                ?>
-                </div>
-                <div class="col-sm">
+                  $sql = "SELECT WEEK(fecha), SUM(cantidad) FROM salidas WHERE idrestaurante = $idRestaurante AND fecha >= NOW() - INTERVAL 4 WEEK GROUP BY WEEK(fecha);";
+                  $result = mysqli_query($con,$sql);
+                  
+                  $labelSemana = "[";
+                  $dataVentasSemanal = "[";
+
+                  while ($row = $result->fetch_assoc()) {
+                    $semana = $row['WEEK(fecha)'];
+                    $ventas = $row['SUM(cantidad)'];
+
+                    $labelSemana = $labelSemana."'Semana $semana',";
+                    $dataVentasSemanal = $dataVentasSemanal."$ventas,";
+                  }
+
+                  $labelSemana = substr_replace($labelSemana ,"",-1);
+                  $labelSemana =$labelSemana."]";
+                  
+                  $dataVentasSemanal = substr_replace($dataVentasSemanal ,"",-1);
+                  $dataVentasSemanal =$dataVentasSemanal."]";
+
+                  if($numeroDeEntradas > 0){
+                    echo "
+                      <div class='container'>
+                        <div class='row'>
+                            <div class='col-sm chartBox'>
+                                <canvas id='myChart' width='200' height='200'></canvas>
+                            </div>
+                            <div class='col-sm chartBox'>
+                                <canvas id='chartFechas' width='200' height='200'></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: $labels,
+                            datasets: [{
+                                label: 'Veces que se compró',
+                                data: $data,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                     
-                </div>
-            </div>
-        </div>
-
-
+                    const elementcanvas = document.getElementById('chartFechas').getContext('2d');
+                    const chartFecha = new Chart(elementcanvas, {
+                        type: 'bar',
+                        data: {
+                            labels: $labelSemana,
+                            datasets: [{
+                                label: 'Ventas en esta semana',
+                                data: $dataVentasSemanal,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });</script>";
+                  } else{
+                    echo"
+                    <center><b>No hay suficiente información para generar gráficas</b></center>
+                    ";
+                  }
+                ?>
     </main>
 </body>
 
