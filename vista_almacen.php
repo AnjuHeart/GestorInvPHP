@@ -42,7 +42,11 @@
                 $('#updateExist').val(existTabla);
             });
             $(".deleteBtn").click(function() {
-                
+                $('#popDestruirMateria').modal('show');
+                var idTabla = $(this).closest("tr").find(".almacenIdTabla").text()
+                var nameTabla = $(this).closest("tr").find(".almacenNameTabla").text()
+                $('#deleteId').val(idTabla);
+                $('#deleteName').val(nameTabla);
             });
         }
         function actualizarAlmacen(){
@@ -64,6 +68,14 @@
             } else {
                 alert("Favor de llenar completamente el formulario");
             }
+        }
+        function eliminaAlmacen(){
+            $.post("eliminaalmacen.php", {
+                id: $('#deleteId').val()
+            },
+            function(data, status) {});
+            alert("Destruccion de materia prima realizada");
+            location.reload();
         }
     </script>
     <title>Almacen</title>
@@ -237,6 +249,47 @@
                 </div>
             </div>
         </div>
+
+        <!-- POP CONFIRMAR ELIMINACION DE MATERIA PRIMA -->
+        <div class="modal fade" id="popDestruirMateria" tabindex="-1" aria-labelledby="popDestruirMateriaLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="popDestruirMateriaLabel">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <center><p><b>Accion posiblemente destructiva</b></p></center>
+                        <p> La eliminación de materia prima conlleva afectar a todos los productos
+                            que hagan uso de los materiales. Es posible
+                            que esto conlleve a la inutilizacion de productos establecidos anteriormente.
+                            Por favor, asegúrese que los productos configurados no hagan uso de la materia 
+                            prima a eliminar para mantener la integridad de la aplicación.
+                            </p>
+                        <fieldset disabled>
+                            <div class="input-group flex-nowrap disabled">
+                                <span class="input-group-text" id="addon-wrapping">ID</span>
+                                <input type="text" class="form-control" placeholder="Por defecto..."
+                                    aria-label="Por defecto..." aria-describedby="addon-wrapping" id="deleteId">
+                            </div>
+                        
+                            <br>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Nombre </span>
+                                <input type="text" class="form-control" placeholder="Ingredientes, condimetos..." aria-label="Ingredientes, condimetos..."
+                                    aria-describedby="basic-addon1" id="deleteName">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" onClick="eliminaAlmacen();"><b>ELIMINAR</b></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </main>
 </body>
 
