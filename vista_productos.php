@@ -224,8 +224,8 @@
                     <?php
                     $con = mysqli_connect('localhost','root','',"gestor_php");
 
-                    $idUsuario = $_SESSION['idusuario'];
-                    $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
+                    $idUsuario = $_SESSION['idrestaurante'];
+                    $sql = "SELECT * FROM productos WHERE idrestaurante=$idUsuario";
                     $result = mysqli_query($con,$sql);
 
                     while ($row = $result->fetch_assoc()) {

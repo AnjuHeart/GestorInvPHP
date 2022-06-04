@@ -30,7 +30,41 @@
         } else {
             alert("Favor de llenar completamente el formulario");
         }
-    }
+      }
+        function updateButtons(){
+            $(".updateBtn").click(function() {
+                $('#popActualizar').modal('show');
+                var idTabla = $(this).closest("tr").find(".almacenIdTabla").text()
+                var nameTabla = $(this).closest("tr").find(".almacenNameTabla").text()
+                var existTabla = $(this).closest("tr").find(".almacenExistTabla").text()
+                $('#updateID').val(idTabla);
+                $('#updateName').val(nameTabla);
+                $('#updateExist').val(existTabla);
+            });
+            $(".deleteBtn").click(function() {
+                
+            });
+        }
+        function actualizarAlmacen(){
+            var upID = $('#updateID').val();
+            var upName = $('#updateName').val();
+            var upExis = $('#updateExist').val();
+
+            if (upID != "" && upName != "" && upExis != "") {
+                //REPLICACIÓN DE POST
+                $.post("actualizaalmacen.php", {
+                    id: $('#updateID').val(),
+                    nombre:  $('#updateName').val(),
+                    existencias: $('#updateExist').val()
+                },
+                function(data, status) {
+                    alert("La inserción fue realizada correctamente");
+                });
+                location.reload();
+            } else {
+                alert("Favor de llenar completamente el formulario");
+            }
+        }
     </script>
     <title>Almacen</title>
 </head>
@@ -139,6 +173,7 @@
                     <th>ID</th>
                     <th>Descripción</th>
                     <th>Existencias</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -151,14 +186,57 @@
 
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
-                    <td>". $row["id"] ."</td>
-                    <td>". strtoupper($row["nombre"]) ."</td>
-                    <td>". $row["existencias"] ."</td>
-                    </tr>";
+                    <td class='almacenIdTabla'>". $row["id"] ."</td>
+                    <td class='almacenNameTabla'>". strtoupper($row["nombre"]) ."</td>
+                    <td class='almacenExistTabla'>". $row["existencias"] .'</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary updateBtn">Actualizar</button>
+                            <button type="button" class="btn btn-danger deleteBtn">Eliminar</button>
+                        </div>
+                    </td>
+                    </tr>';
                 }
+                echo "<script>updateButtons();</script>"
                ?>
             </tbody>
         </table>
+        <!-- POP MODULAR UPDATE ALMACEN -->
+        <div class="modal fade" id="popActualizar" tabindex="-1" aria-labelledby="popActualizarLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="popActualizarLabel">Actualizar Almacen</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <fieldset disabled>
+                            <div class="input-group flex-nowrap disabled">
+                                <span class="input-group-text" id="addon-wrapping">ID</span>
+                                <input type="text" class="form-control" placeholder="Por defecto..."
+                                    aria-label="Por defecto..." aria-describedby="addon-wrapping" name="updateId" id="updateID">
+                            </div>
+                        </fieldset>
+                        <br>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Nombre </span>
+                            <input type="text" class="form-control" placeholder="Ingredientes, condimetos..." aria-label="Ingredientes, condimetos..."
+                                aria-describedby="basic-addon1" id="updateName">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Existencias</span>
+                            <input type="text" class="form-control" placeholder="Ej. 0, 10" aria-label="Ej. 0, 10"
+                                aria-describedby="basic-addon1" id="updateExist">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onClick="actualizarAlmacen();">Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 
