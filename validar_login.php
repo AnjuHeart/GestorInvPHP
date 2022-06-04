@@ -19,9 +19,12 @@
             $fila = mysqli_fetch_row($resultado);
 
             if(password_verify($contra, $fila[3])){
+                $consultarestaurante = "SELECT*FROM restaurantes WHERE id= $fila[4]";
+                $resultadorest = mysqli_query($con,$consultarestaurante);
+                $filarest = mysqli_fetch_row($resultadorest);
                 SESSION_START();
                 $_SESSION['usuario']=$usuario;
-                $_SESSION['idrestaurante']=$fila[4];
+                $_SESSION['restaurante']=$filarest[1];
                 header("location:vista_dashboard.php");
             } else{
                 ?>

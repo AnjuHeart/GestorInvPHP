@@ -44,7 +44,7 @@
                         <img src="./img/logo.png" alt="logo">
                     </a>
                     <p class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none link-dark">
-                        NOMBRE DEL RESTAURANTE
+                    <?php SESSION_START(); echo("Restaurante: ".$_SESSION['restaurante']); ?>
                     </p>
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
