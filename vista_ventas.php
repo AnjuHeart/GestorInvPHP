@@ -174,7 +174,7 @@
           alert("La venta de " + prodname +" no fue registrada, revisar nuevamente la información")
         }
       });
-      alert("Ventas registradas con éxito")
+      alert("Ventas registradas con éxito");
     }
     </script>
 </html>

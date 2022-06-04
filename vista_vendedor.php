@@ -13,16 +13,16 @@
     function updateButtons() {
         $(".addBtn").click(function() {
 
-            var actual = parseInt($(this).closest("tr").find(".cant").text());
+            var actual = parseInt($(this).closest("tr").find(".matcant").text());
             actual += 1;
-            $(this).closest("tr").find(".cant").text(actual);
+            $(this).closest("tr").find(".matcant").text(actual);
             console.log('Funciona');
         });
         $(".substractBtn").click(function() {
-            var actual = parseInt($(this).closest("tr").find(".cant").text());
+            var actual = parseInt($(this).closest("tr").find(".matcant").text());
             if (actual >= 1) {
                 actual += -1;
-                $(this).closest("tr").find(".cant").text(actual);
+                $(this).closest("tr").find(".matcant").text(actual);
             }
         });
     }
@@ -65,7 +65,7 @@
         <h1>Ventas recibidas</h1>
 
         <!-- TABLA -->
-        <table class="table">
+        <table class="table" id="tablaVentas">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
@@ -92,11 +92,11 @@
                     if($row['estado'] == "pendiente"){
                         $idProd = $row["idprod"];
                     echo "<tr>
-                    <td>". $row["id"] ."</td>
-                    <td>". $idProd ."</td>
-                    <td>". $row["cantidad"] ."</td>
-                    <td>
-                    <table class='table table-striped'>
+                    <td class='RowID'>". $row["id"] ."</td>
+                    <td class='RowProdID'>". $idProd ."</td>
+                    <td class='RowCantVenta'>". $row["cantidad"] ."</td>
+                    <td class='RowMateriaVenta'>
+                    <table class='table table-striped tablaMateriaRow'>
                         <thead class='thead-dark'>
                             <tr>
                                 <th>ID</th>
@@ -114,10 +114,10 @@
                             $sql = "SELECT * FROM almacen WHERE id=$valor";
                             $resultMateria = mysqli_query($con,$sql);
                             $filaMateria = mysqli_fetch_array($resultMateria);
-                            echo "<tr>";
-                            echo "<td>".$filaMateria['id']."</td>";
-                            echo "<td>".strtoupper($filaMateria['nombre'])."</td>";
-                            echo "<td class='cant'>".$row["cantidad"]."</td>";
+                            echo "<tr class='matRow'>";
+                            echo "<td class='matid'>".$filaMateria['id']."</td>";
+                            echo "<td class='matname'>".strtoupper($filaMateria['nombre'])."</td>";
+                            echo "<td class='matcant'>".$row["cantidad"]."</td>";
                             echo '<td><div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-secondary addBtn">+</button>
                             <button type="button" class="btn btn-danger  substractBtn">-</button>
@@ -127,8 +127,8 @@
                         
                     echo "</tbody>
                     </table></td>
-                    <td>". $row["total"] ."</td>
-                    <td>". $row["notas"] ."</td>
+                    <td class='RowTotal'>". $row["total"] ."</td>
+                    <td class='RowNotas'>". $row["notas"] ."</td>
                     </tr>";
                     }
                 }
@@ -137,8 +137,36 @@
             </tbody>
         </table>
         <button type="button" class="btn btn-success" style="position: fixed; bottom: 30px; right: 20px;"
-            onClick="">Enviar Pedidos</button>
+            onClick="pushSalidas();">Enviar Pedidos</button>
     </main>
 </body>
+<script>
+    function pushSalidas(){
+        $('#tablaVentas > tbody  > tr').each(function() {
+            var idVenta = $(this).find(".RowID").text();
+            var idProducto = $(this).find(".RowProdID").text();
+            var cantVenta = $(this).find(".RowCantVenta").text();
+            var totalVenta = $(this).find(".RowTotal").text();
 
+            $(this).find(".matRow").each(
+                function(){
+                    var matID = $(this).find(".matid").text();
+                    var matCANT = $(this).find(".matcant").text();
+                    $.post("restamateria.php", {
+                        idmat: matID,
+                        cantmat: matCANT
+                    },function(data, status) {})
+                }
+            );
+
+            $.post("agregarsalida.php", {
+                id: idVenta,
+                idprod: idProducto,
+                cant: cantVenta,
+                total: totalVenta,
+            },function(data, status) {})
+      });
+      alert("Salidas registradas con éxito");
+    }
+</script>
 </html>
