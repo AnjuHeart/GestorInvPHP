@@ -133,20 +133,22 @@
             </thead>
             <tbody>
                 <?php
-                $con = mysqli_connect('localhost','root','',"gestor_php");
+                    $restaurante=$_SESSION['restaurante'];
+                    $con = mysqli_connect('localhost','root','',"gestor_php");
+                    $sql = "SELECT id FROM restaurantes WHERE nombre='$restaurante'";
+                    $result = mysqli_query($con,$sql);
+                    $id=mysqli_num_rows($result);
 
+                    $sqlalmacen = "SELECT * FROM almacen WHERE idrestaurante=$id";
+                    $resultado = mysqli_query($con,$sqlalmacen);
 
-                $idAlmacen = $_SESSION['idrestaurante'];
-                $sql = "SELECT * FROM almacen WHERE idrestaurante=$idAlmacen";
-                $result = mysqli_query($con,$sql);
-
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                    <td>". $row["id"] ."</td>
-                    <td>". strtoupper($row["nombre"]) ."</td>
-                    <td>". $row["existencias"] ."</td>
-                    </tr>";
-                }
+                    while ($row = $resultado->fetch_assoc()) {
+                        echo "<tr>
+                        <td>". $row["id"] ."</td>
+                        <td>". strtoupper($row["nombre"]) ."</td>
+                        <td>". $row["existencias"] ."</td>
+                        </tr>";
+                    }
                ?>
             </tbody>
         </table>
