@@ -74,8 +74,8 @@
                 <?php
                   $con = mysqli_connect('localhost','root','',"gestor_php");
                   
-                  $idUsuario = $_SESSION['idusuario'];
-                  $sql = "SELECT * FROM productos WHERE usuario=$idUsuario";
+                  $idUsuario = $_SESSION['idrestaurante'];
+                  $sql = "SELECT * FROM productos WHERE idrestaurante=$idUsuario";
                   $result = mysqli_query($con,$sql);
   
                   while ($row = $result->fetch_assoc()) {
@@ -94,6 +94,7 @@
                     <th scope="col">Precio</th>
                     <th scope="col">Total</th>
                     <th scope="col">Acciones</th>
+                    <th scope="col">Notas</th>
                 </tr>
             </thead>
             <tbody>
@@ -117,6 +118,9 @@
                             <button type="button" class="btn btn-secondary  substractBtn"><i class="bi bi-dash-lg"></i></button>
                             <button type="button" class="btn btn-danger deleteBtn"><i class="bi bi-x"></i></button>
                         </div></td>
+                            <td><div class="input-group">
+                            <textarea class="form-control notas" aria-label="With textarea"></textarea>
+                            </div></td>
                         </tr>`
 
         $("#tablaVentas > tbody").append(filaTabla);
@@ -153,6 +157,7 @@
         var cantidad = $(this).find(".cant").text();
         var precio = $(this).find(".precio").text();
         var total = $(this).find(".total").text();
+        var notas = $(this).find(".notas").val();
 
         if(parseInt(cantidad) > 0){
           $.post("agregarventa.php", {
@@ -160,7 +165,8 @@
                 producto: prodname,
                 cant: cantidad,
                 price: precio,
-                canttotal: total
+                canttotal: total,
+                nota: notas
             },
             function(data, status) {});
             $(this).remove();

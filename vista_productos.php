@@ -177,8 +177,7 @@
                         <div id="checkboxes">
                             <?php
                                 $con = mysqli_connect('localhost','root','',"gestor_php");
-                                $_SESSION['idusuario'] = "6"; //Este session usuario es un parche, debe ser eliminado en cuanto funcione el login
-
+                                
                                 $idUsuario = $_SESSION['idusuario'];
                                 $sql = "SELECT * FROM usuarios WHERE id=$idUsuario LIMIT 1;";
                                 $result = mysqli_query($con,$sql);

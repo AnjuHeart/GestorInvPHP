@@ -20,8 +20,13 @@
             if(password_verify($contra, $fila[3])){
                 SESSION_START();
                 $_SESSION['usuario']=$usuario;
+                $_SESSION['idusuario']=$fila[0];
                 $_SESSION['idrestaurante']=$fila[4];
-                header("location:vista_dashboard.php");
+                if($fila[2] == "vendedor"){
+                    header("location:vista_vendedor.php");
+                }else{
+                    header("location:vista_dashboard.php");
+                }
             } else{
                 ?>
                 <?php

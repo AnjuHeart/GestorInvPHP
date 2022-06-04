@@ -36,7 +36,18 @@
                         <img src="./img/logo.png" alt="logo">
                     </a>
                     <p class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none link-dark">
-                        NOMBRE DEL RESTAURANTE
+                    <?php
+                        SESSION_START();
+                        $idRestaurante = $_SESSION['idrestaurante'];
+                        
+                        $con = mysqli_connect('localhost','root','',"gestor_php");
+                        
+                        $consulta = "SELECT*FROM restaurantes WHERE id= '$idRestaurante'";
+                        $resultado = mysqli_query($con,$consulta);
+                        $fila = mysqli_fetch_row($resultado);
+                        
+                        echo("Restaurante: ".$fila[1]); ?>
+                    </p>
                     </p>
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
@@ -66,9 +77,8 @@
             <tbody>
             <?php
                 $con = mysqli_connect('localhost','root','',"gestor_php");
-                
                 $idUsuario = $_SESSION['idusuario'];
-                $sql = "SELECT * FROM usuarios WHERE id=$idUsuario LIMIT 1;";
+                $sql = "SELECT * FROM usuarios WHERE id='$idUsuario';";
                 $result = mysqli_query($con,$sql);
                 $row = mysqli_fetch_array($result);
                 $idRestaurante = $row['idrestaurante'];
@@ -83,7 +93,7 @@
                     <td>". $idProd ."</td>
                     <td>". $row["cantidad"] ."</td>
                     <td>
-                    <table class='table'>
+                    <table class='table table-striped'>
                         <thead class='thead-dark'>
                             <tr>
                                 <th>ID</th>

@@ -145,7 +145,6 @@
                 <?php
                 $con = mysqli_connect('localhost','root','',"gestor_php");
 
-
                 $idAlmacen = $_SESSION['idrestaurante'];
                 $sql = "SELECT * FROM almacen WHERE idrestaurante=$idAlmacen";
                 $result = mysqli_query($con,$sql);
