@@ -31,7 +31,6 @@
                 ?>
                 <?php
                 include("login.php");
-                echo(password_verify($contra,$fila[3]));
                 ?>
                 <script type = "text/javascript"> 
                     alert("Verifique que el usuario y contraseña sean correctos");
